@@ -51,7 +51,7 @@ def call(config) {
                     edgeXSetupEnvironment(_envVarMap)
 
                     dir('.ci-management') {
-                        git url: 'https://github.com/edgexfoundry/ci-management.git'
+                        git url: 'https://github.com/cherrycl/ci-management.git'
                         sh 'chmod +x shell/*'
                     }
 
