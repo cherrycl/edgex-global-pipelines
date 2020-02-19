@@ -72,9 +72,13 @@ def getNode(config, arch) {
 }
 
 def setupNodes(config) {
+    // def defaultNodes = [
+    //     [label: 'centos7-docker-4c-2g', arch: 'amd64', isDefault: true],
+    //     [label: 'ubuntu18.04-docker-arm64-4c-2g', arch: 'arm64', isDefault: false]
+    // ]
     def defaultNodes = [
-        [label: 'centos7-docker-4c-2g', arch: 'amd64', isDefault: true],
-        [label: 'ubuntu18.04-docker-arm64-4c-2g', arch: 'arm64', isDefault: false]
+        [label: 'edgex-client', arch: 'amd64', isDefault: true],
+        [label: 'redisissue', arch: 'arm64', isDefault: false]
     ]
 
     def _arch = config.arch ?: ['amd64', 'arm64']
