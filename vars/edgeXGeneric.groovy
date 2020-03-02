@@ -35,7 +35,7 @@ def call(config) {
     def _envVarMap = toEnvironment(config)
 
     pipeline {
-        agent { label edgex.mainNode(config) }
+        agent { label 'xpert-client' }
 
         options {
             timestamps()
@@ -74,10 +74,10 @@ def call(config) {
             stage('Build') {
                 parallel {
                     stage('amd64') {
-                        when {
-                            beforeAgent true
-                            expression { edgex.nodeExists(config, 'amd64') }
-                        }
+                        // when {
+                        //     beforeAgent true
+                        //     expression { edgex.nodeExists(config, 'amd64') }
+                        // }
                         // agent { label edgex.getNode(config, 'amd64') }
                         environment {
                             ARCH = 'x86_64'
