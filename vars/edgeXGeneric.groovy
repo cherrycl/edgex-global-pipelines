@@ -86,7 +86,7 @@ def call(config) {
                         stages {
                             stage('Prep VM') {
                                 steps {
-                                    edgeXDockerLogin(settingsFile: env.MAVEN_SETTINGS)
+                                    //edgeXDockerLogin(settingsFile: env.MAVEN_SETTINGS)
                                     // unstash 'ci-management' no need to unstash this since we are already on the mainNode
                                     script {
                                         cfgAmd64 = getConfigFilesFromEnv()
@@ -161,119 +161,6 @@ def call(config) {
                                     }
                                 }
                             }
-                        }
-                    }
-                    stage('arm64') {
-                        when {
-                            beforeAgent true
-                            expression { edgex.nodeExists(config, 'arm64') }
-                        }
-                        agent { label edgex.getNode(config, 'arm64') }
-                        environment {
-                            ARCH = 'arm64'
-                            GOARCH = 'arm64'
-                        }
-                        stages {
-                            stage('Prep VM') {
-                                steps {
-                                    edgeXDockerLogin(settingsFile: env.MAVEN_SETTINGS)
-                                    unstash 'ci-management'
-                                    script {
-                                        cfgArm64 = getConfigFilesFromEnv()
-                                    }
-                                }
-                            }
-                            stage('Pre Build') {
-                                when { expression { anyScript(config, 'pre_build', env.GIT_BRANCH) } }
-                                steps {
-                                    script {
-                                        withCredentials(config.credentials) {
-                                            configFileProvider(cfgArm64) {
-                                                withEnv(["PATH=${setupPath(config)}"]) {
-                                                    def scripts = allScripts(config, 'pre_build', env.GIT_BRANCH)
-                                                    println "$ARCH pre_build: ${scripts}"
-                                                    scripts.each { userScript ->
-                                                        if(userScript.indexOf('shell/') == 0) {
-                                                            sh "./.ci-management/${userScript}"
-                                                        } else {
-                                                            sh userScript
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                            stage('Build') {
-                                when { expression { anyScript(config, 'build', env.GIT_BRANCH) } }
-                                steps {
-                                    script {
-                                        withCredentials(config.credentials) {
-                                            configFileProvider(cfgArm64) {
-                                                withEnv(["PATH=${setupPath(config)}"]) {
-                                                    def scripts = allScripts(config, 'build', env.GIT_BRANCH)
-                                                    println "$ARCH build: ${scripts}"
-                                                    scripts.each { userScript ->
-                                                        if(userScript.indexOf('shell/') == 0) {
-                                                            sh "./.ci-management/${userScript}"
-                                                        } else {
-                                                            sh userScript
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                            stage('Post Build') {
-                                when { expression { anyScript(config, 'post_build', env.GIT_BRANCH) } }
-                                steps {
-                                    script {
-                                        withCredentials(config.credentials) {
-                                            configFileProvider(cfgArm64) {
-                                                withEnv(["PATH=${setupPath(config)}"]) {
-                                                    def scripts = allScripts(config, 'post_build', env.GIT_BRANCH)
-                                                    println "$ARCH post_build: ${scripts}"
-                                                    scripts.each { userScript ->
-                                                        if(userScript.indexOf('shell/') == 0) {
-                                                            sh "./.ci-management/${userScript}"
-                                                        } else {
-                                                            sh userScript
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            stage('Semver') {
-                when {
-                    allOf {
-                        environment name: 'USE_SEMVER', value: 'true'
-                        expression { edgex.isReleaseStream() }
-                    }
-                }
-                stages {
-                    stage('Tag') {
-                        steps {
-                            unstash 'semver'
-
-                            edgeXSemver 'tag'
-                            edgeXInfraLFToolsSign(command: 'git-tag', version: 'v${VERSION}')
-                        }
-                    }
-                    stage('Bump Pre-Release Version') {
-                        steps {
-                            edgeXSemver 'bump pre'
-                            edgeXSemver 'push'
                         }
                     }
                 }
