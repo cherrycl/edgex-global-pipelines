@@ -84,15 +84,15 @@ def call(config) {
                             GOARCH = 'amd64'
                         }
                         stages {
-                            stage('Prep VM') {
-                                steps {
-                                    //edgeXDockerLogin(settingsFile: env.MAVEN_SETTINGS)
-                                    // unstash 'ci-management' no need to unstash this since we are already on the mainNode
-                                    script {
-                                        cfgAmd64 = getConfigFilesFromEnv()
-                                    }
-                                }
-                            }
+                            // stage('Prep VM') {
+                            //     steps {
+                            //         //edgeXDockerLogin(settingsFile: env.MAVEN_SETTINGS)
+                            //         // unstash 'ci-management' no need to unstash this since we are already on the mainNode
+                            //         script {
+                            //             cfgAmd64 = getConfigFilesFromEnv()
+                            //         }
+                            //     }
+                            // }
                             stage('Pre Build') {
                                 when { expression { anyScript(config, 'pre_build', env.GIT_BRANCH) } }
                                 steps {
