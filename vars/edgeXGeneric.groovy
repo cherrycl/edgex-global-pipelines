@@ -55,8 +55,8 @@ def call(config) {
                     edgeXSetupEnvironment(_envVarMap)
 
                     dir('.ci-management') {
-                        git url: 'https://github.com/cherrycl/ci-management.git'
-                        git branch: '*/issue-579'
+                        git branch: '*/issue-579',
+                            url: 'https://github.com/cherrycl/ci-management.git'
                         sh 'chmod +x shell/*'
                     }
 
