@@ -1,7 +1,7 @@
 [changelog]
 header = "## [[Wait for merging]] Changelog"
 body = """
-{% for group, commits in commits | group_by(attribute="group") | sort(attribute="group") %}
+{% for group, commits in commits | sort(attribute="group") | group_by(attribute="group") %}
 ### {{ group | striptags | trim | upper_first }}
 {% for commit in commits %}
 - {{ commit.message }} ([{{ commit.id | truncate(length=7, end="") }}](https://github.com/edgexfoundry/edgex-go/commit/{{ commit.id }}))

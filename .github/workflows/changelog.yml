@@ -40,6 +40,9 @@ jobs:
           echo "commitId=$commitId" >> $GITHUB_ENV
           echo "NEXT_VERSION=$next_version" >> $GITHUB_ENV
 
+      - name: Extract repository name
+        run: echo "REPO_NAME=$(echo ${{ matrix.repository }} | cut -d'/' -f2)" >> $GITHUB_ENV
+
       - name: Generate Changelogs
         uses: orhun/git-cliff-action@v4
         id: git-cliff
@@ -48,9 +51,6 @@ jobs:
           args: -- ${{ env.commitId }}..HEAD
         env:
           OUTPUT: changelog-${{ env.REPO_NAME }}.md
-
-      - name: Extract repository name
-        run: echo "REPO_NAME=$(echo ${{ matrix.repository }} | cut -d'/' -f2)" >> $GITHUB_ENV
 
       - name: Upload changelog artifact
         uses: actions/upload-artifact@v4
