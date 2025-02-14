@@ -43,13 +43,13 @@ jobs:
         id: git-cliff
         with:
           config: cliff.toml
-          args: --topo-order true -- ${{ env.commitId }}..HEAD
+          args: --topo-order -- ${{ env.commitId }}..HEAD
         env:
-          OUTPUT: CHANGELOG.md
+          OUTPUT: changelog-${{ env.NEXT_VERSION }}.md
 
       - name: Upload changelog artifact
         uses: actions/upload-artifact@v4
         with:
           name: changelog-repo1
-          path: CHANGELOG.md
+          path: changelog-${{ env.NEXT_VERSION }}.md
 
