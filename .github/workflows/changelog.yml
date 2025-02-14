@@ -2,8 +2,9 @@ name: Generate Changelog
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '0 0 * * *'  # Runs daily at midnight UTC
+  push:
+    branches:
+      - changelog
 
 jobs:
   generate-changelog:
@@ -29,7 +30,7 @@ jobs:
         run: |
           git fetch --tags
           latest_tag=$(git describe --tags --abbrev=0)
-          previous_tag=$(git describe --tags --abbrev=0 --always --exclude=$latest_tag)
+          previous_tag=$(git tag --sort=-v:refname | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$' | head -n 1)
           
           echo "Generating changelog from $previous_tag to $latest_tag"
           
