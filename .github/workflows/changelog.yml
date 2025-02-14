@@ -39,7 +39,7 @@ jobs:
       - name: Upload changelog artifact
         uses: actions/upload-artifact@v4
         with:
-          name: changelog-${{ matrix.repository }}
+          name: changelog-repo1
           path: changelog.md
 
       - name: Commit and push changelog
