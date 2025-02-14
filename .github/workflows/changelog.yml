@@ -34,6 +34,9 @@ jobs:
           echo "commitId=$commitId" >> $GITHUB_ENV
           echo "NEXT_VERSION=$next_version" >> $GITHUB_ENV
 
+      - name: Copy centralized cliff.toml
+        run: cp .github/configs/cliff.toml cliff.toml
+
       - name: Generate Changelogs
         uses: orhun/git-cliff-action@v4
         id: git-cliff
