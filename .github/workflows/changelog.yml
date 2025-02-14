@@ -1,0 +1,53 @@
+name: Generate Changelog
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'  # Runs daily at midnight UTC
+
+jobs:
+  generate-changelog:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        repository: 
+          - cherrycl/edgex-go
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ matrix.repository }}
+          token: ${{ secrets.GH_PAT }} # Personal Access Token with repo access
+
+      - name: Install dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y git jq
+
+      - name: Generate changelog
+        run: |
+          git fetch --tags
+          latest_tag=$(git describe --tags --abbrev=0)
+          previous_tag=$(git describe --tags --abbrev=0 --always --exclude=$latest_tag)
+          
+          echo "Generating changelog from $previous_tag to $latest_tag"
+          
+          git log $previous_tag..$latest_tag --pretty=format:"- %s [%h]" > changelog.md
+          cat changelog.md
+
+      - name: Upload changelog artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: changelog-${{ matrix.repository }}
+          path: changelog.md
+
+      - name: Commit and push changelog
+        run: |
+          git config --global user.email "github-actions@github.com"
+          git config --global user.name "GitHub Actions"
+          
+          git add changelog.md
+          git commit -m "Update changelog for ${{ matrix.repository }}"
+          git push
+        continue-on-error: true
