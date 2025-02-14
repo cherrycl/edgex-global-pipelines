@@ -30,7 +30,7 @@ jobs:
           next_version=$(echo "$next_stable" | sed -E 's/v//')
           
           echo "Generating changelog from $previous_tag to $latest_tag"
-          commitId=$(git rev-list -n 1 ${{ env.LATEST_STABLE }})
+          commitId=$(git rev-list -n 1 $latest_stable)
           echo "commitId=$commitId" >> $GITHUB_ENV
           echo "NEXT_VERSION=$next_version" >> $GITHUB_ENV
 
