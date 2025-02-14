@@ -48,7 +48,6 @@ jobs:
         id: git-cliff
         with:
           config: cliff.toml
-          args: -- ${{ env.commitId }}..HEAD
         env:
           OUTPUT: changelog-${{ env.REPO_NAME }}.md
 
