@@ -20,6 +20,10 @@ jobs:
         with:
           repository: ${{ matrix.repository }}
 
+      - name: Download centralized cliff.toml
+        run: |
+          curl -sSL -o cliff.toml https://raw.githubusercontent.com/cherrycl/edgex-global-pipelines/refs/heads/${{ github.ref_name }}/.github/configs/cliff.toml
+
       - name: Get CommitId by Latest Stable Tag
         run: |
           git fetch --tags
@@ -33,9 +37,6 @@ jobs:
           commitId=$(git rev-list -n 1 $latest_stable)
           echo "commitId=$commitId" >> $GITHUB_ENV
           echo "NEXT_VERSION=$next_version" >> $GITHUB_ENV
-
-      - name: Copy centralized cliff.toml
-        run: cp .github/configs/cliff.toml cliff.toml
 
       - name: Generate Changelogs
         uses: orhun/git-cliff-action@v4
