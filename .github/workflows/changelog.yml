@@ -47,7 +47,7 @@ jobs:
           config: cliff.toml
           args: -- ${{ env.commitId }}..HEAD
         env:
-          OUTPUT: changelog-${{ env.NEXT_VERSION }}.md
+          OUTPUT: changelog-${{ env.REPO_NAME }}.md
 
       - name: Extract repository name
         run: echo "REPO_NAME=$(echo ${{ matrix.repository }} | cut -d'/' -f2)" >> $GITHUB_ENV
@@ -55,5 +55,5 @@ jobs:
       - name: Upload changelog artifact
         uses: actions/upload-artifact@v4
         with:
-          name: changelog-${{ env.REPO_NAME }}
-          path: changelog-${{ env.REPO_NAME }}-${{ env.NEXT_VERSION }}.md
+          name: changelog-${{ env.REPO_NAME }}-${{ env.NEXT_VERSION }}
+          path: changelog-${{ env.REPO_NAME }}.md
