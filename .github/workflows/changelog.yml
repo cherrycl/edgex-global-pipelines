@@ -40,11 +40,6 @@ jobs:
           echo "commitId=$commitId" >> $GITHUB_ENV
           echo "NEXT_VERSION=$next_version" >> $GITHUB_ENV
 
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: v${{ env.NEXT_VERSION }}
-
       - name: Extract repository name
         run: echo "REPO_NAME=$(echo ${{ matrix.repository }} | cut -d'/' -f2)" >> $GITHUB_ENV
 
@@ -53,6 +48,7 @@ jobs:
         id: git-cliff
         with:
           config: cliff.toml
+          args: -- ${{ env.commitId }}..HEAD
         env:
           OUTPUT: changelog-${{ env.REPO_NAME }}.md
 
