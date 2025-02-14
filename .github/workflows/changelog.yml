@@ -20,6 +20,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: ${{ matrix.repository }}
+          fetch-depth: 0  # Ensures all tags and history are fetched
 
       - name: Download centralized cliff.toml
         run: |
@@ -27,7 +28,7 @@ jobs:
 
       - name: Get CommitId by Latest Stable Tag
         run: |
-          git fetch --all
+          git fetch --tags
           latest_stable=$(git tag --sort=-v:refname | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$' | head -n 1)
           echo "1: $latest_stable"
           latest_tag=$(git describe --tags --abbrev=0)
@@ -51,8 +52,11 @@ jobs:
         env:
           OUTPUT: changelog-${{ env.NEXT_VERSION }}.md
 
+      - name: Extract repository name
+        run: echo "REPO_NAME=$(echo ${{ matrix.repository }} | cut -d'/' -f2)" >> $GITHUB_ENV
+
       - name: Upload changelog artifact
         uses: actions/upload-artifact@v4
         with:
-          name: changelog-$(basename ${{ matrix.repository }})
+          name: changelog-${{ env.REPO_NAME }}
           path: changelog-${{ env.NEXT_VERSION }}.md
