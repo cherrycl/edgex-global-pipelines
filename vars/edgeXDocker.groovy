@@ -51,6 +51,19 @@
 def build(dockerImageName, baseImage = null) {
     def buildArgs = ['']
 
+    println "[DEBUG] Starting edgeXDocker.build()"
+    println "[DEBUG] dockerImageName = ${dockerImageName}"
+    println "[DEBUG] baseImage = ${baseImage}"
+    println "[DEBUG] env.ARCH = ${env.ARCH}"
+    println "[DEBUG] env.BUILD_SCRIPT = ${env.BUILD_SCRIPT}"
+    println "[DEBUG] env.DOCKER_BUILD_ARGS = ${env.DOCKER_BUILD_ARGS}"
+    println "[DEBUG] env.DOCKER_FILE_PATH = ${env.DOCKER_FILE_PATH}"
+    println "[DEBUG] env.DOCKER_BUILD_CONTEXT = ${env.DOCKER_BUILD_CONTEXT}"
+    println "[DEBUG] env.VERSION = ${env.VERSION}"
+
+    // Log all env vars
+    sh 'echo "[DEBUG] ENVIRONMENT VARIABLES:" && printenv | sort'
+
     if(baseImage) {
         buildArgs << "BASE='${baseImage}'"
     }
@@ -59,9 +72,7 @@ def build(dockerImageName, baseImage = null) {
         buildArgs << "MAKE='${env.BUILD_SCRIPT}'"
     }
 
-    // transform to standard arch
     def buildArgArch = env.ARCH
-
     if(env.ARCH == 'x86_64') {
         buildArgArch = 'amd64'
     } else if(env.ARCH == 'aarch64') {
@@ -80,23 +91,33 @@ def build(dockerImageName, baseImage = null) {
     }
 
     def buildArgString = buildArgs.join(' --build-arg ')
+    println "[DEBUG] Final build args: ${buildArgString}"
 
     def labels = ['', "'git_sha=${env.GIT_COMMIT}'", "'arch=${buildArgArch}'"]
-
-    // in case VERSION is not set (i.e. use semver = false)
     if(env.VERSION) {
         labels << "'version=${env.VERSION}'"
     }
-
-    // devops labels go here (date, branch, build number, etc)
     def labelString = labels.join(' --label ')
+    println "[DEBUG] Final labels: ${labelString}"
 
-    // for LF jenkins, reset owner before build
+    def finalBuildCommand = "-f ${env.DOCKER_FILE_PATH} ${buildArgString} ${labelString} ${env.DOCKER_BUILD_CONTEXT}"
+    println "[DEBUG] Final docker build command: docker build ${finalBuildCommand}"
+
+    // List files before build
+    sh 'echo "[DEBUG] Contents of current directory:" && ls -al .'
+
+    // Reset ownership before build
     sh 'sudo chown -R jenkins:jenkins .'
-    sh 'ls -al .'
 
-    docker.build(finalImageName(dockerImageName), "-f ${env.DOCKER_FILE_PATH} ${buildArgString} ${labelString} ${env.DOCKER_BUILD_CONTEXT}")
+    try {
+        docker.build(finalImageName(dockerImageName), finalBuildCommand)
+    } catch (e) {
+        println "[ERROR] Docker build failed: ${e.message}"
+        e.printStackTrace()
+        throw e
+    }
 }
+
 
 def buildInParallel(dockerImages, imageNamePrefix, baseImage = null) {
     def composeImage = env.ARCH == 'arm64'
@@ -123,6 +144,9 @@ def buildInParallel(dockerImages, imageNamePrefix, baseImage = null) {
 
     withEnv(envVars) {
         docker.image(composeImage).inside('-u 0:0 --entrypoint= -v /var/run/docker.sock:/var/run/docker.sock --privileged') {
+            println "[DEBUG] Running docker compose with image: ${composeImage}"
+            sh 'cat ./docker-compose-build.yml'
+            sh 'printenv | sort'
             sh 'docker compose -f ./docker-compose-build.yml build --parallel'
         }
 
@@ -159,6 +183,8 @@ def generateServiceYaml(serviceName, imageNamePrefix, dockerFile, labels, arch =
 // push single docker image with tags. Also create and push multi-architecture images based on the pushed images.
 def push(dockerImage, latest = true, nexusRepo = 'staging', tags = null) {
     def pushedImages = []
+    println "[DEBUG] Pushing image: ${dockerImage}"
+    println "[DEBUG] Tags: ${tags}"
 
     pushedImages = pushDockerImage(dockerImage, latest, nexusRepo, tags)
 
