@@ -30,13 +30,13 @@ jobs:
 
       # Same behavior as edgeXGHPagesPublish
       - name: Checkout gh-pages
-        if: github.event_name == 'push' && github.repository_owner == 'edgexfoundry'
+        if: github.event_name == 'push' && github.repository_owner == 'cherrycl'
         uses: actions/checkout@v7
         with:
           ref: gh-pages
           path: gh-pages
       - name: Publish to GitHub pages
-        if: github.event_name == 'push' && github.repository_owner == 'edgexfoundry'
+        if: github.event_name == 'push' && github.repository_owner == 'cherrycl'
         run: |
           set -euo pipefail
           COMMIT_MSG=$(git log -1 --format=%s)

@@ -5,7 +5,7 @@ on:
 
 jobs:
   tag:
-    if: github.repository_owner == 'edgexfoundry'
+    if: github.repository_owner == 'cherrycl'
     runs-on: ubuntu-latest
     permissions:
       contents: write
