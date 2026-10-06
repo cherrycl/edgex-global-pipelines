@@ -12,13 +12,13 @@
         <meta name="author" content="EdgeX DevOps Team">
       
       
-        <link rel="canonical" href="https://edgexfoundry.github.io/edgex-global-pipelines/libraries/edgeXBuildCApp/">
+        <link rel="canonical" href="https://edgexfoundry.github.io/edgex-global-pipelines/libraries/edgeXBuildMultiArch/">
       
       
-        <link rel="prev" href="../..">
+        <link rel="prev" href="../edgeXUpdateNamedTag/">
       
       
-        <link rel="next" href="../edgeXBuildDocker/">
+        <link rel="next" href="../edgeXRelease/">
       
       
         
@@ -29,7 +29,7 @@
     
     
       
-        <title>edgeXBuildCApp - EdgeX Global Pipelines Documentation</title>
+        <title>edgeXBuildMultiArch - EdgeX Global Pipelines Documentation</title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#edgexbuildcapp" class="md-skip">
+        <a href="#edgexbuildmultiarch" class="md-skip">
           Skip to content
         </a>
       
@@ -109,7 +109,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              edgeXBuildCApp
+              edgeXBuildMultiArch
             
           </span>
         </div>
@@ -307,20 +307,18 @@
       
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
         
           
           <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
@@ -341,7 +339,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -356,37 +354,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    edgeXBuildCApp
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../edgeXBuildCApp/" class="md-nav__link">
         
   
   
@@ -402,98 +373,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#overview" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Overview
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#parameters" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Parameters
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Usage
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Usage">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#basic-example" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Basic example
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#complex-example" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Complex example
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#full-example" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Full example
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -622,18 +501,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
@@ -654,7 +535,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1089,10 +970,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../edgeXBuildMultiArch/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    edgeXBuildMultiArch
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1108,6 +1016,59 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameters
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Usage
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1897,45 +1858,6 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Usage">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#basic-example" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Basic example
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#complex-example" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Complex example
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#full-example" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Full example
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
     </ul>
@@ -1958,10 +1880,9 @@
   
 
 
-<h1 id="edgexbuildcapp">edgeXBuildCApp</h1>
-<p>Shared Library to build C projects</p>
+<h1 id="edgexbuildmultiarch">edgeXBuildMultiArch</h1>
 <h2 id="overview">Overview</h2>
-<p><img alt="edgeXBuildCApp" src="../images/edgeXBuildCApp.png" /></p>
+<p>Shared Library to build multi-arch docker images</p>
 <h2 id="parameters">Parameters</h2>
 <table>
 <thead>
@@ -1974,165 +1895,21 @@
 </thead>
 <tbody>
 <tr>
-<td>project</td>
-<td>required</td>
+<td>settingsFile</td>
+<td>true</td>
 <td>str</td>
-<td>The name of your project.</td>
+<td>Config file Id that contains authentication details to docker registries. Unique to each Edgex repository.</td>
 </tr>
 <tr>
-<td>mavenSettings</td>
-<td>optional</td>
-<td>str</td>
-<td>The maven settings file in Jenkins that has been created for your project. <strong>Note</strong> the maven settings file specified must exist in Jenkins in order for your project to build.<br /><br /><strong>Default</strong>: <code>${project}-settings</code></td>
-</tr>
-<tr>
-<td>semver</td>
-<td>optional</td>
-<td>bool</td>
-<td>Specify if semantic versioning will be used to version your project. <strong>Note</strong> edgeX utilizes <a href="https://github.com/edgexfoundry/git-semver">git-semver</a> for semantic versioning.<br /><br /><strong>Default</strong>: <code>true</code></td>
-</tr>
-<tr>
-<td>testScript</td>
-<td>optional</td>
-<td>str</td>
-<td>The command the build will use to test your project. <strong>Note</strong> the specified test script will execute in the project's CI build container.<br /><br /><strong>Default</strong>: <code>make test</code></td>
-</tr>
-<tr>
-<td>buildScript</td>
-<td>optional</td>
-<td>str</td>
-<td>The command the build will use to build your project.<br /><br /><strong>Default</strong>: <code>make build</code></td>
-</tr>
-<tr>
-<td>dockerBaseImage</td>
-<td>optional</td>
-<td>str</td>
-<td>The docker base image for your project.<br /><br /><strong>Default</strong>: <code>nexus3.edgexfoundry.org:10003/edgex-devops/edgex-gcc-base:latest</code></td>
-</tr>
-<tr>
-<td>dockerFilePath</td>
-<td>optional</td>
-<td>str</td>
-<td>The path to the Dockerfile for your project.<br /><br /><strong>Default</strong>: <code>Dockerfile</code></td>
-</tr>
-<tr>
-<td>dockerBuildFilePath</td>
-<td>optional</td>
-<td>str</td>
-<td>The path to the Dockerfile that will serve as the CI build image for your project.<br /><br /><strong>Default</strong>: <code>Dockerfile.build</code></td>
-</tr>
-<tr>
-<td>dockerBuildContext</td>
-<td>optional</td>
-<td>str</td>
-<td>The path for Docker to use as its build context when building your project. This applies to building both the CI build image and project image.<br /><br /><strong>Default</strong>: <code>.</code></td>
-</tr>
-<tr>
-<td>dockerBuildImageTarget</td>
-<td>optional</td>
-<td>str</td>
-<td>The name of the docker multi-stage-build stage the pipeline will use when building the CI build image.<br /><br /><strong>Default</strong>: <code>builder</code></td>
-</tr>
-<tr>
-<td>dockerBuildArgs</td>
-<td>optional</td>
+<td>images</td>
+<td>true</td>
 <td>list</td>
-<td>The list of additonal arguments to pass to Docker when building the image for your project.<br /><br /><strong>Default</strong>: <code>[]</code></td>
-</tr>
-<tr>
-<td>dockerNamespace</td>
-<td>optional</td>
-<td>str</td>
-<td>The docker registry namespace to use when publishing Docker images. <strong>Note</strong> for EdgeX projects images are published to the root of the docker registry and thus the namespace should be empty.<br /><br /><strong>Default</strong>: <code>''</code></td>
-</tr>
-<tr>
-<td>dockerImageName</td>
-<td>optional</td>
-<td>str</td>
-<td>The name of the Docker image for your project.<br /><br /><strong>Default</strong>: <code>docker-${project}</code></td>
-</tr>
-<tr>
-<td>dockerNexusRepo</td>
-<td>optional</td>
-<td>str</td>
-<td>The name of the Docker Nexus repository where the project Docker image <code>dockerImageName</code> will be published to if <code>pushImage</code> is set.<br /><br /><strong>Default</strong>: <code>staging</code></td>
-</tr>
-<tr>
-<td>buildImage</td>
-<td>optional</td>
-<td>bool</td>
-<td>Specify if Jenkins should build a Docker image for your project. <strong>Note</strong> if false then <code>pushImage</code> will also be set to false.<br /><br /><strong>Default</strong>: <code>true</code></td>
-</tr>
-<tr>
-<td>pushImage</td>
-<td>optional</td>
-<td>bool</td>
-<td>Specify if Jenkins should push your project's image to <code>dockerNexusRepo</code>.<br /><br /><strong>Default</strong>: <code>true</code></td>
-</tr>
-<tr>
-<td>semverBump</td>
-<td>optional</td>
-<td>str</td>
-<td>The semver axis to bump, see <a href="https://github.com/edgexfoundry/git-semver">git-semver</a> for valid axis values.<br /><br /><strong>Default</strong>: <code>pre</code></td>
-</tr>
-<tr>
-<td>buildSnap</td>
-<td>optional</td>
-<td>bool</td>
-<td>Specify if Jenkins should build a Snap for your project. <strong>Note</strong> If set, your project must also include a valid snapcraft yaml <code>snap/snapcraft.yaml</code> for Jenkins to attempt to build the Snap.<br /><br /><strong>Default</strong>: <code>false</code></td>
-</tr>
-<tr>
-<td>failureNotify</td>
-<td>optional</td>
-<td>str</td>
-<td>The group emails (comma-delimited) to email when the Jenkins job fails.<br /><br /><strong>Default</strong>: <code>edgex-tsc-core@lists.edgexfoundry.org,edgex-tsc-devops@lists.edgexfoundry.org</code></td>
-</tr>
-<tr>
-<td>arch</td>
-<td>optional</td>
-<td>array</td>
-<td>A list of system architectures to target for the build. Possible values are <code>amd64</code> or <code>arm64</code>.<br /><br /><strong>Default</strong>: ['amd64', 'arm64']</td>
+<td>This list of existing images to re-tag and build multi-arch images.</td>
 </tr>
 </tbody>
 </table>
 <h2 id="usage">Usage</h2>
-<h3 id="basic-example">Basic example</h3>
-<div class="highlight"><pre><span></span><code><span class="n">edgeXBuildCApp</span><span class="w"> </span><span class="o">(</span>
-<span class="w">   </span><span class="nl">project:</span><span class="w"> </span><span class="s1">'device-bacnet-c'</span>
-<span class="o">)</span>
-</code></pre></div>
-<h3 id="complex-example">Complex example</h3>
-<div class="highlight"><pre><span></span><code><span class="n">edgeXBuildCApp</span><span class="w"> </span><span class="o">(</span>
-<span class="w">    </span><span class="nl">project:</span><span class="w"> </span><span class="s1">'device-sdk-c'</span><span class="o">,</span>
-<span class="w">    </span><span class="nl">dockerBuildFilePath:</span><span class="w"> </span><span class="s1">'scripts/Dockerfile.alpine-3.11-base'</span><span class="o">,</span>
-<span class="w">    </span><span class="nl">dockerFilePath:</span><span class="w"> </span><span class="s1">'scripts/Dockerfile.alpine-3.11'</span><span class="o">,</span>
-<span class="w">    </span><span class="nl">testScript:</span><span class="w"> </span><span class="s1">'apk add --update --no-cache openssl ca-certificates &amp;&amp; make test'</span><span class="o">,</span>
-<span class="w">    </span><span class="nl">pushImage:</span><span class="w"> </span><span class="kc">false</span>
-<span class="o">)</span>
-</code></pre></div>
-<h3 id="full-example">Full example</h3>
-<p>This example shows all the settings that can be specified and their default values.</p>
-<div class="highlight"><pre><span></span><code><span class="n">edgeXBuildCApp</span><span class="w"> </span><span class="o">(</span>
-<span class="w">    </span><span class="nl">project:</span><span class="w"> </span><span class="s1">'c-project'</span><span class="o">,</span>
-<span class="w">    </span><span class="nl">mavenSettings:</span><span class="w"> </span><span class="s1">'c-project-settings'</span><span class="o">,</span>
-<span class="w">    </span><span class="nl">semver:</span><span class="w"> </span><span class="kc">true</span><span class="o">,</span>
-<span class="w">    </span><span class="nl">testScript:</span><span class="w"> </span><span class="s1">'make test'</span><span class="o">,</span>
-<span class="w">    </span><span class="nl">buildScript:</span><span class="w"> </span><span class="s1">'make build'</span><span class="o">,</span>
-<span class="w">    </span><span class="nl">dockerBaseImage:</span><span class="w"> </span><span class="s1">'nexus3.edgexfoundry.org:10003/edgex-devops/edgex-gcc-base:latest'</span><span class="o">,</span>
-<span class="w">    </span><span class="nl">dockerFilePath:</span><span class="w"> </span><span class="s1">'Dockerfile'</span><span class="o">,</span>
-<span class="w">    </span><span class="nl">dockerBuildFilePath:</span><span class="w"> </span><span class="s1">'Dockerfile.build'</span><span class="o">,</span>
-<span class="w">    </span><span class="nl">dockerBuildContext:</span><span class="w"> </span><span class="s1">'.'</span><span class="o">,</span>
-<span class="w">    </span><span class="nl">dockerBuildArgs:</span><span class="w"> </span><span class="o">[],</span>
-<span class="w">    </span><span class="nl">dockerNamespace:</span><span class="w"> </span><span class="s1">''</span><span class="o">,</span>
-<span class="w">    </span><span class="nl">dockerImageName:</span><span class="w"> </span><span class="s1">'docker-c-project'</span><span class="o">,</span>
-<span class="w">    </span><span class="nl">dockerNexusRepo:</span><span class="w"> </span><span class="s1">'staging'</span><span class="o">,</span>
-<span class="w">    </span><span class="nl">buildImage:</span><span class="w"> </span><span class="kc">true</span><span class="o">,</span>
-<span class="w">    </span><span class="nl">pushImage:</span><span class="w"> </span><span class="kc">true</span><span class="o">,</span>
-<span class="w">    </span><span class="nl">semverBump:</span><span class="w"> </span><span class="s1">'pre'</span><span class="o">,</span>
-<span class="w">    </span><span class="nl">buildSnap:</span><span class="w"> </span><span class="kc">false</span><span class="o">,</span>
-<span class="w">    </span><span class="nl">failureNotify:</span><span class="w"> </span><span class="s1">'edgex-tsc-core@lists.edgexfoundry.org,edgex-tsc-devops@lists.edgexfoundry.org'</span><span class="o">,</span>
-<span class="w">    </span><span class="nl">arch:</span><span class="w"> </span><span class="o">[</span><span class="s1">'amd64'</span><span class="o">,</span><span class="w"> </span><span class="s1">'arm64'</span><span class="o">]</span>
-<span class="o">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">edgeXBuildMultiArch</span><span class="o">(</span><span class="nl">images:</span><span class="w"> </span><span class="o">[</span><span class="s2">"nexus3.edgexfoundry.org:10004/sample-service:latest"</span><span class="o">],</span><span class="w"> </span><span class="nl">settingsFile:</span><span class="w"> </span><span class="s1">'edgex-repo-settings'</span><span class="o">)</span>
 </code></pre></div>
 
 
